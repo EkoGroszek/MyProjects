@@ -3,6 +3,7 @@ package sample;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TextArea;
 import sample.datamodel.ToDoItem;
 
 import java.time.LocalDate;
@@ -15,7 +16,9 @@ public class Controller {
     private List<ToDoItem> toDoItems;                   //lista naszych zadań
 
     @FXML
-    private ListView toDoListView;                      // parametr do wyświetlania listy zadań w pasku po lewo
+    private ListView <ToDoItem> toDoListView;                      // parametr do wyświetlania listy zadań w pasku po lewo
+    @FXML
+    private TextArea itemDetailsTextarea;               // prametr do wyświetlania detali zadania w polu tekstowym
 
     public void initialize() {
         ToDoItem item1 = new ToDoItem("Testowe przypomnienie o urodzinach", "Kup Oli coś na urodziny dzbanie", LocalDate.of(2019, Month.APRIL, 25));
@@ -33,6 +36,19 @@ public class Controller {
 
         toDoListView.getItems().setAll(toDoItems);                                                                      // przekazanie listy zadań do parametru który ją wyświetla
         toDoListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);                                        // linia odpowiedzialna za zaznacznie elementów listy (SINGLE - tylko jeden na raz | MULTIPLE - z CTRL można zaznaczyć kilka)
+
+
+    }
+
+    @FXML
+    public void handleClickListView(){                                                                                  //handler do klikania listy zadań
+        ToDoItem item = toDoListView.getSelectionModel().getSelectedItem();                                             //pobieram do zmiennej "item" dane z aktualnie klikniętego zadania
+        //System.out.println(item);
+        StringBuilder sb = new StringBuilder(item.getDetails());
+        sb.append("\n\n\n\n");
+        sb.append("Termin zadania : ");
+        sb.append(item.getDeadline().toString());
+        itemDetailsTextarea.setText(sb.toString());                                                                     //wyświetlam tetale kliknętego aktualnie zadania
 
 
     }

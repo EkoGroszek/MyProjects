@@ -1,5 +1,8 @@
 package sample;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 import sample.datamodel.ToDoItem;
 
 import java.time.LocalDate;
@@ -10,6 +13,9 @@ import java.util.List;
 public class Controller {
 
     private List<ToDoItem> toDoItems;                   //lista naszych zadań
+
+    @FXML
+    private ListView toDoListView;                      // parametr do wyświetlania listy zadań w pasku po lewo
 
     public void initialize() {
         ToDoItem item1 = new ToDoItem("Testowe przypomnienie o urodzinach", "Kup Oli coś na urodziny dzbanie", LocalDate.of(2019, Month.APRIL, 25));
@@ -24,6 +30,10 @@ public class Controller {
         toDoItems.add(item3);
         toDoItems.add(item4);
         toDoItems.add(item5);
+
+        toDoListView.getItems().setAll(toDoItems);                                                                      // przekazanie listy zadań do parametru który ją wyświetla
+        toDoListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);                                        // linia odpowiedzialna za zaznacznie elementów listy (SINGLE - tylko jeden na raz | MULTIPLE - z CTRL można zaznaczyć kilka)
+
 
     }
 }

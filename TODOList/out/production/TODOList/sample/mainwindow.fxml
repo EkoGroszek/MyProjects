@@ -6,14 +6,32 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
 <BorderPane fx:controller="sample.Controller"
-            xmlns:fx="http://javafx.com/fxml" >
+            xmlns:fx="http://javafx.com/fxml">
     <left>
-        <ListView fx:id = "toDoListView" onMouseClicked="#handleClickListView">
+        <ListView fx:id="toDoListView">
 
         </ListView>
     </left>
     <center>
-        <TextArea fx:id="itemDetailsTextarea"/>
+        <VBox style="-fx-background-color: white">
+            <TextArea fx:id="itemDetailsTextarea" VBox.vgrow="ALWAYS"/>  <!--VBox jest po to żeby etykieta była zawsze na dole okna-->
+            <HBox>
+                <Label text="Termin zadania: " style="-fx-background-color: white">
+                    <font>
+                        <Font name="Times New Roman bold" size="20"/>
+                    </font>
+                </Label>
+                <Label fx:id ="deadlineLabel" style="-fx-background-color: white">
+                    <font>
+                        <Font name="Times New Roman bold" size="20"/>
+                    </font>
+                </Label>
+            </HBox>
+        </VBox>
+
     </center>
 </BorderPane>

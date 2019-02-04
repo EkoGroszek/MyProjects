@@ -13,21 +13,18 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
-<BorderPane fx:controller="sample.Controller"
+<BorderPane fx:id="mainBorderPain" fx:controller="sample.Controller"
             xmlns:fx="http://javafx.com/fxml">
     <top>
         <MenuBar>
             <Menu text="Plik">
                 <items>
-                    <MenuItem text="Nowy.."/>
+                    <MenuItem text="Nowy.." onAction="#showNewItemDialog"/>
                     <SeparatorMenuItem/>
                     <MenuItem text="Wyjście"/>
                 </items>
-
             </Menu>
-            <Menu text="Pliwk">
 
-            </Menu>
         </MenuBar>
     </top>
     <left>
@@ -37,14 +34,15 @@
     </left>
     <center>
         <VBox style="-fx-background-color: white">
-            <TextArea fx:id="itemDetailsTextarea" VBox.vgrow="ALWAYS"/>  <!--VBox jest po to żeby etykieta była zawsze na dole okna-->
+            <TextArea fx:id="itemDetailsTextarea"
+                      VBox.vgrow="ALWAYS"/>  <!--VBox jest po to żeby etykieta była zawsze na dole okna-->
             <HBox>
                 <Label text="Termin zadania: " style="-fx-background-color: white">
                     <font>
                         <Font name="Times New Roman bold" size="20"/>
                     </font>
                 </Label>
-                <Label fx:id ="deadlineLabel" style="-fx-background-color: white">
+                <Label fx:id="deadlineLabel" style="-fx-background-color: white">
                     <font>
                         <Font name="Times New Roman bold" size="20"/>
                     </font>

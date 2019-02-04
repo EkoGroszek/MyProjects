@@ -3,18 +3,20 @@ package sample;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TextArea;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
 import sample.datamodel.ToDoData;
 import sample.datamodel.ToDoItem;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class Controller {
 
@@ -26,22 +28,11 @@ public class Controller {
     private TextArea itemDetailsTextarea;               // prametr do wyświetlania detali zadania w polu tekstowym
     @FXML
     private Label deadlineLabel;                        // parametr od etykiedy daty zakończenia zadania
+    @FXML
+    private BorderPane mainBorderPain;
 
     public void initialize() {
-//        ToDoItem item1 = new ToDoItem("Testowe przypomnienie o urodzinach", "Kup Oli coś na urodziny dzbanie", LocalDate.of(2019, Month.APRIL, 25));
-//        ToDoItem item2 = new ToDoItem("Lekarz", "Idź do lekarza dzbanie ", LocalDate.of(2019, Month.MAY, 12));
-//        ToDoItem item3 = new ToDoItem("Skończ projekt", "Skończ ten projekt w końcu ", LocalDate.of(2019, Month.APRIL, 20));
-//        ToDoItem item4 = new ToDoItem("Samobój", "Weź sie zabij albo co", LocalDate.of(2019, Month.JANUARY, 28));
-//        ToDoItem item5 = new ToDoItem("Zakupy", "Idź na zakupy kup mleko", LocalDate.of(2019, Month.MARCH, 1));
-//
-//        toDoItems = new ArrayList<>();
-//        toDoItems.add(item1);
-//        toDoItems.add(item2);
-//        toDoItems.add(item3);
-//        toDoItems.add(item4);
-//        toDoItems.add(item5);
-//
-//        ToDoData.getInstance().setToDoItems(toDoItems);
+
 
         toDoListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<ToDoItem>() {            //handler który działa zawsze i reaguje na zmianę zaznaczonego zdania a nie na kliknięcie myszką
             @Override
@@ -55,10 +46,42 @@ public class Controller {
             }
         });
 
-        toDoListView.getItems().setAll(ToDoData.getInstance().getToDoItems());                                                                      // przekazanie listy zadań do parametru który ją wyświetla
+        toDoListView.getItems().setAll(ToDoData.getInstance().getToDoItems());                                          // przekazanie listy zadań do parametru który ją wyświetla
         toDoListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);                                        // linia odpowiedzialna za zaznacznie elementów listy (SINGLE - tylko jeden na raz | MULTIPLE - z CTRL można zaznaczyć kilka)
         toDoListView.getSelectionModel().selectFirst();                                                                 // zaznacza pierwsze zadanie na liście odrazu po właczniu apki
 
+    }
+
+    @FXML
+    public void showNewItemDialog() {                                                                                   // funkcja od wyskakującego okienka z wprowadzaniem nowego zadania
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.initOwner(mainBorderPain.getScene().getWindow());
+        dialog.setTitle("Nowe zadanie");
+        //dialog.setHeaderText("Taki nagłówek ale odgordzony od reszty");
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("todoItemDialog.fxml"));                                    // przkazanie "okna wprowadzania nowego zadania" do loadera
+
+        try {
+            dialog.getDialogPane().setContent(fxmlLoader.load());
+        } catch (IOException e) {
+            System.out.println("Nie mogę załadować dialogu");
+            e.printStackTrace();
+            return;
+        }
+
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
+
+        Optional<ButtonType> result = dialog.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            DialogController controller = fxmlLoader.getController();
+            ToDoItem newItem = controller.processResult();
+            toDoListView.getItems().setAll(ToDoData.getInstance().getToDoItems());                                      // po dodaniu nowego zadania pokazuje sie ono odrazu na liście
+            toDoListView.getSelectionModel().select(newItem);
+            System.out.println("OK pressed");
+        }else{
+            System.out.println("Cancle pressed");
+        }
     }
 
     @FXML
@@ -66,12 +89,5 @@ public class Controller {
         ToDoItem item = toDoListView.getSelectionModel().getSelectedItem();                                             //pobieram do zmiennej "item" dane z aktualnie klikniętego zadania
         itemDetailsTextarea.setText(item.getDetails());                                                                 //przekazuje do pola teksotwgo "detale zadania"
         deadlineLabel.setText(item.getDeadline().toString());                                                           //przekazuje do etykiety "Termin zadania"
-        //System.out.println(item);
-//        StringBuilder sb = new StringBuilder(item.getDetails());
-//        sb.append("\n\n\n\n");
-//        sb.append("Termin zadania : ");
-//        sb.append(item.getDeadline().toString());
-//        itemDetailsTextarea.setText(sb.toString());                                                                     //wyświetlam detale kliknętego aktualnie zadania
-
     }
 }

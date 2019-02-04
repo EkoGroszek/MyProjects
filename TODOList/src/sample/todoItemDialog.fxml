@@ -1,0 +1,24 @@
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.DatePicker?>
+<DialogPane fx:controller="sample.DialogController"
+            xmlns:fx="http://javafx.com/fxml">
+    <headerText>
+        Tu będą instrukcje
+    </headerText>
+    <content>
+        <GridPane vgap="10" hgap="10">
+            <Label text="Nazwa zadania: " GridPane.rowIndex="0" GridPane.columnIndex="0" />
+            <TextField fx:id="taskName" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+            <Label text="Opis zadania: " GridPane.rowIndex="1" GridPane.columnIndex="0" />
+            <TextArea fx:id="deetailsArea" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+            <Label text="Termin zadanmia: " GridPane.rowIndex="2" GridPane.columnIndex="0" />
+            <DatePicker fx:id="deadlinePicker" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+
+        </GridPane>
+    </content>
+</DialogPane>

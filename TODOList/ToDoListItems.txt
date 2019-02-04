@@ -3,3 +3,7 @@ Lekarz	Idź do lekarza dzbanie 	12-05-2019
 Skończ projekt	Skończ ten projekt w końcu 	20-04-2019
 Samobój	Weź sie zabij albo co	28-01-2019
 Zakupy	Idź na zakupy kup mleko	01-03-2019
+Nowe testowe zdaanie	Treść testowa	06-02-2019
+Test 2	poka sowe a nie krowe	21-02-2019
+asdas	asdasdasdasd	12-02-2019
+Kolejny teścik	tastujemy dobrsze dasdasdasdasdsad	14-02-2019

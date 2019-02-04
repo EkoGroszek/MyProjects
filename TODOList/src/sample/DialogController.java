@@ -23,6 +23,12 @@ public class DialogController {
         String task = taskName.getText().trim();
         String details = deetailsArea.getText().trim();
         LocalDate deadlineValue = deadlinePicker.getValue();
+        if(task == null)
+            task = "Puste zadanie!!!!";
+        if(details == null)
+            details = "Nie podano treści zadania !!!";
+        if(deadlineValue == null)
+        deadlineValue = LocalDate.now();
 
         ToDoItem newItem = new ToDoItem(task, details, deadlineValue);
         ToDoData.getInstance().addToDoItem(newItem);

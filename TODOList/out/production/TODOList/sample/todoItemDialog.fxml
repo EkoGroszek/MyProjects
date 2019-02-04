@@ -13,11 +13,11 @@
     <content>
         <GridPane vgap="10" hgap="10">
             <Label text="Nazwa zadania: " GridPane.rowIndex="0" GridPane.columnIndex="0" />
-            <TextField fx:id="taskName" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+            <TextField fx:id="taskName" GridPane.rowIndex="0" GridPane.columnIndex="1" ></TextField>
             <Label text="Opis zadania: " GridPane.rowIndex="1" GridPane.columnIndex="0" />
-            <TextArea fx:id="deetailsArea" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+            <TextArea fx:id="deetailsArea" GridPane.rowIndex="1" GridPane.columnIndex="1" wrapText="true"></TextArea>
             <Label text="Termin zadanmia: " GridPane.rowIndex="2" GridPane.columnIndex="0" />
-            <DatePicker fx:id="deadlinePicker" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+            <DatePicker fx:id="deadlinePicker" GridPane.rowIndex="2" GridPane.columnIndex="1" ></DatePicker>
 
         </GridPane>
     </content>

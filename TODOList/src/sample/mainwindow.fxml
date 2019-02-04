@@ -13,19 +13,29 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.control.ToggleButton?>
 <BorderPane fx:id="mainBorderPain" fx:controller="sample.Controller"
             xmlns:fx="http://javafx.com/fxml">
     <top>
-        <MenuBar>
-            <Menu text="Plik">
-                <items>
-                    <MenuItem text="Nowy.." onAction="#showNewItemDialog"/>
-                    <SeparatorMenuItem/>
-                    <MenuItem text="Wyjście"/>
-                </items>
-            </Menu>
+        <VBox>
+            <!--<MenuBar>-->
+                <!--<Menu text="Plik">-->
+                    <!--<items>-->
+                        <!--<MenuItem text="Nowy.." onAction="#showNewItemDialog"/>-->
+                        <!--<SeparatorMenuItem/>-->
+                        <!--<MenuItem text="Wyjście"/>-->
+                    <!--</items>-->
+                <!--</Menu>-->
+            <!--</MenuBar>-->
+            <ToolBar>
+                <HBox>
+                    <Button text="Nowe.." onAction="#showNewItemDialog"/>
+                    <ToggleButton fx:id="handleFilterButton" text="Dzisiejsze zadania " onAction="#handleFilterButton"/>
+                </HBox>
+            </ToolBar>
+        </VBox>
 
-        </MenuBar>
     </top>
     <left>
         <ListView fx:id="toDoListView">

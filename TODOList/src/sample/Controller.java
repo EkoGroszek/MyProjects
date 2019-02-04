@@ -11,6 +11,7 @@ import sample.datamodel.ToDoItem;
 
 import java.time.LocalDate;
 import java.time.Month;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,7 +46,8 @@ public class Controller {
                 if (newValue != null) {
                     ToDoItem item = toDoListView.getSelectionModel().getSelectedItem();                                 //pobieram do zmiennej "item" dane z aktualnie klikniętego zadania
                     itemDetailsTextarea.setText(item.getDetails());                                                     //przekazuje do pola teksotwgo "detale zadania"
-                    deadlineLabel.setText(item.getDeadline().toString());                                               //przekazuje do etykiety "Termin zadania"
+                    DateTimeFormatter dF = DateTimeFormatter.ofPattern("d MMMM yyyy");                                 //formater do daty
+                    deadlineLabel.setText(dF.format(item.getDeadline()));                                               //przekazuje do etykiety "Termin zadania"
                 }
             }
         });

@@ -12,9 +12,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
 import java.util.List;
+                                                //KLASA DO PBSŁUGI ZAPISU I ODCZYTU
 
 public class ToDoData {
-    private static ToDoData instance = new ToDoData();
+    private static ToDoData instance = new ToDoData();                                                                  //singleton
     private static String filename = "ToDoListItems.txt";
 
     private List<ToDoItem> toDoItems;
@@ -24,19 +25,19 @@ public class ToDoData {
         return instance;
     }
 
-    private ToDoData() {
+    private ToDoData() {                                            //prywatny konstruktor
         formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     }
 
     public List<ToDoItem> getToDoItems() {
         return toDoItems;
     }
+//
+//    public void setToDoItems(List<ToDoItem> toDoItems) {
+//        this.toDoItems = toDoItems;
+//    }
 
-    public void setToDoItems(List<ToDoItem> toDoItems) {
-        this.toDoItems = toDoItems;
-    }
-
-    public void loadToDoItems() throws IOException {
+    public void loadToDoItems() throws IOException {                                                                    // funcja do ładowania listy z pliku
         toDoItems = FXCollections.observableArrayList();
         Path path = Paths.get(filename);
         BufferedReader br = Files.newBufferedReader(path);
@@ -62,7 +63,7 @@ public class ToDoData {
         }
     }
 
-    public void storeToDoItems() throws IOException {
+    public void storeToDoItems() throws IOException {                                                                   // funkcja do zapisu listy do pliku
         Path path = Paths.get(filename);
         BufferedWriter bw = Files.newBufferedWriter(path);
         try {

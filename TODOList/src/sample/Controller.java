@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextArea;
+import sample.datamodel.ToDoData;
 import sample.datamodel.ToDoItem;
 
 import java.time.LocalDate;
@@ -27,18 +28,20 @@ public class Controller {
     private Label deadlineLabel;                        // parametr od etykiedy daty zakończenia zadania
 
     public void initialize() {
-        ToDoItem item1 = new ToDoItem("Testowe przypomnienie o urodzinach", "Kup Oli coś na urodziny dzbanie", LocalDate.of(2019, Month.APRIL, 25));
-        ToDoItem item2 = new ToDoItem("Lekarz", "Idź do lekarza dzbanie ", LocalDate.of(2019, Month.MAY, 12));
-        ToDoItem item3 = new ToDoItem("Skończ projekt", "Skończ ten projekt w końcu ", LocalDate.of(2019, Month.APRIL, 20));
-        ToDoItem item4 = new ToDoItem("Samobój", "Weź sie zabij albo co", LocalDate.of(2019, Month.JANUARY, 28));
-        ToDoItem item5 = new ToDoItem("Zakupy", "Idź na zakupy kup mleko", LocalDate.of(2019, Month.MARCH, 1));
-
-        toDoItems = new ArrayList<>();
-        toDoItems.add(item1);
-        toDoItems.add(item2);
-        toDoItems.add(item3);
-        toDoItems.add(item4);
-        toDoItems.add(item5);
+//        ToDoItem item1 = new ToDoItem("Testowe przypomnienie o urodzinach", "Kup Oli coś na urodziny dzbanie", LocalDate.of(2019, Month.APRIL, 25));
+//        ToDoItem item2 = new ToDoItem("Lekarz", "Idź do lekarza dzbanie ", LocalDate.of(2019, Month.MAY, 12));
+//        ToDoItem item3 = new ToDoItem("Skończ projekt", "Skończ ten projekt w końcu ", LocalDate.of(2019, Month.APRIL, 20));
+//        ToDoItem item4 = new ToDoItem("Samobój", "Weź sie zabij albo co", LocalDate.of(2019, Month.JANUARY, 28));
+//        ToDoItem item5 = new ToDoItem("Zakupy", "Idź na zakupy kup mleko", LocalDate.of(2019, Month.MARCH, 1));
+//
+//        toDoItems = new ArrayList<>();
+//        toDoItems.add(item1);
+//        toDoItems.add(item2);
+//        toDoItems.add(item3);
+//        toDoItems.add(item4);
+//        toDoItems.add(item5);
+//
+//        ToDoData.getInstance().setToDoItems(toDoItems);
 
         toDoListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<ToDoItem>() {            //handler który działa zawsze i reaguje na zmianę zaznaczonego zdania a nie na kliknięcie myszką
             @Override
@@ -52,7 +55,7 @@ public class Controller {
             }
         });
 
-        toDoListView.getItems().setAll(toDoItems);                                                                      // przekazanie listy zadań do parametru który ją wyświetla
+        toDoListView.getItems().setAll(ToDoData.getInstance().getToDoItems());                                                                      // przekazanie listy zadań do parametru który ją wyświetla
         toDoListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);                                        // linia odpowiedzialna za zaznacznie elementów listy (SINGLE - tylko jeden na raz | MULTIPLE - z CTRL można zaznaczyć kilka)
         toDoListView.getSelectionModel().selectFirst();                                                                 // zaznacza pierwsze zadanie na liście odrazu po właczniu apki
 

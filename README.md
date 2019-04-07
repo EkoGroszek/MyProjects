@@ -1,1 +1,1 @@
-MyProjects
+ToDoList application with GUI
